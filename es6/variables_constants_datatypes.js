@@ -55,3 +55,81 @@ console.log("Negative infinity: " + Number.NEGATIVE_INFINITY);
 let pi = 3.14;
 const message = `The value of PI is ${pi}`;  // Note: Using backticks, not string quotes.
 console.log(message);
+
+
+
+// Multline. There are various syntax for this in JS but does not appear to be well supported.
+// The most reliable is string concatenation. Note you can mixe types too.
+
+multiline1 = "line1 \n" +
+    "line2 \n" +
+    "line3 " + 100 + "\n" +
+    `${ 53.2 + 4}\n` +
+    "line5";
+
+console.log(multiline1);
+
+
+// javascript will still do implicit conversion of strings to number in some cases.
+// have to watch out may be confusing.
+
+const result1 = 4 * "50";  // The string "50" is converted to an integer.   
+console.log(`result1 is ${result1} \n`);
+
+
+//Booleans are express with true and false
+this_is_true = true;
+this_is_false = false;
+
+
+// Symbols are new in ES6. Similar lisp symbols. All symbol are unique.
+const symbol1 = Symbol();
+const symbol2 = Symbol();
+console.log(symbol1 == symbol2);  // this prints false.
+
+const symbol3 = Symbol("This is a symbol");
+const symbol4 = Symbol("This is a symbol");
+console.log(symbol3 == symbol4);  // this also prints false.
+
+
+
+// null and undefined. Both represent something that don't exist.
+// the general rule is the null is for the programmer to use.
+// undfefined is for the compiler to use.
+
+let unknown;
+unknown = null;  // this means not yet known.
+
+
+// Objects.
+// The literal syntax to define an object is a pair of curly braces.
+
+const obj1 = {};
+
+// the contents of an object are called properties.
+
+obj1.name = "obj1";
+
+// You can access properties in these way
+
+console.log(obj1['name']);
+console.log(obj1.name);
+
+// Accessing undefined properties give undefined.
+console.log(obj1.color);
+
+// Some more examples
+
+const point1 = {
+    x: 1,
+    y: 2,
+};
+
+const point2 = { x: 1, y: 2 };
+
+const rectangle1 = {
+    point1: { x: 0,  y: 0},    // an object's properties can also be another object.
+    point2: { x: 10, y: 0},
+    point3: { x: 0, y: 10},
+    point4: { x: 10, y: 10},
+};
