@@ -133,3 +133,39 @@ const rectangle1 = {
     point3: { x: 0, y: 10},
     point4: { x: 10, y: 10},
 };
+
+
+// Objects can also contains functions.
+
+const dog = {
+    bark: function() { return "Woof!";}
+}
+
+console.log(dog.bark());
+
+// It is possible to delete a property from an object.
+delete dog.bark;
+
+
+// Numbers, strings and booleans have corresponding object types (Number, String, Boolean).
+// These objects serve to store special values (Number.INFINITY) and to provide special
+// functions.
+
+let string1 = "This is a test string";
+console.log(string1.toUpperCase());
+
+// Underneath, javascript create a temporary String object for the above string1 primitve.
+// As soon as the toUpperCase() function is called the temporary String object is discarded.
+
+string1.value1 = 3;             // this is allowed
+console.log(string1.value1);    // But this will return undefined.
+
+
+
+//Arrays
+// javascript arrays are similar to arrays in other lanaguages except:
+//  - it is possible to add and remove elements at any time.
+//  - elements do not all have to be the same type.
+
+
+const a1 = [0, 1, 'c', 3.14];
