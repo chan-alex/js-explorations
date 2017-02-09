@@ -169,3 +169,53 @@ console.log(string1.value1);    // But this will return undefined.
 
 
 const a1 = [0, 1, 'c', 3.14];
+const a2 = [ 0, 1, [0, 1, 2 ,3], 3, 4];
+
+// this is how to find the length of an array
+console.log(`The length of a2 is ${a2.length}`);
+
+
+//arrays are zero indexed. Elements are accessed with the usual array syntax
+console.log(`The 2nd element of a1 is: ${a1[1]}`);
+
+
+// Overwrite an element of an array by assigning
+a1[3] = "4th element"
+
+
+
+// Dates
+// Javascript has a builtin type for dates. This is a port from Java and shares similar
+// problems.
+
+// To get the dat and time right now
+const now = new Date();
+console.log(now);
+
+
+// To create a specifc date
+const xmas = new Date(2017, 11 ,25);  // Note: months are zero based. December = 11.
+
+// To get a specific date and time
+const xmas_party = new Date(2017, 11, 24, 18, 45);  //24 Dec 2017 1845hrs
+
+
+// To get the components of an Date type:
+console.log(xmas_party.getFullYear());
+console.log(xmas_party.getMonth());
+console.log(xmas_party.getDate());
+console.log(xmas_party.getDay());   // 0 = Sunday, 1 = Monday ...
+console.log(xmas_party.getHours());
+
+
+//Regexs are represented in javascript like this
+
+const regex1 = /\b1234\b/;  // just an random example 
+// extremely simple email recognizer
+const email = /\b[a-z0-9._-]+@[a-z_-]+(?:\.[a-z]+)+\b/;
+
+
+//Datatype conversion
+
+const numeric_string1 = "44.56";
+const num1 = Number(numeric_string1);
