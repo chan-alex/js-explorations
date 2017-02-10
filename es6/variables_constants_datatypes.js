@@ -217,5 +217,32 @@ const email = /\b[a-z0-9._-]+@[a-z_-]+(?:\.[a-z]+)+\b/;
 
 //Datatype conversion
 
+//converting to number.
+
+// Using Number object constructor
 const numeric_string1 = "44.56";
-const num1 = Number(numeric_string1);
+const num1 = Number(numeric_string1);  // if conversion fails, returns NaN
+
+// Using builtin parseInt and parseFloat functions.
+
+const num2 = parseInt("75 kg", 10);  // "kg" is ignored. parsed in base 10.
+console.log(num2);
+
+const num3 = parseFloat("3.1A", 10);
+console.log(num3);
+
+
+// Convert Date to Unix time.
+const date1 = new Date();
+const unix_time1 = date1.valueOf();
+console.log(unix_time1);
+
+
+
+// Converting to string.
+
+// All objects in javascript has a toString() function which returns a string
+// representation of the object. default implemenation might not work too well.
+// but for numbers it works well.
+const num4 = 45.56
+console.log(num4.toString());
