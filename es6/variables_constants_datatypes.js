@@ -61,7 +61,7 @@ console.log(message);
 // Multline. There are various syntax for this in JS but does not appear to be well supported.
 // The most reliable is string concatenation. Note you can mixe types too.
 
-multiline1 = "line1 \n" +
+let multiline1 = "line1 \n" +
     "line2 \n" +
     "line3 " + 100 + "\n" +
     `${ 53.2 + 4}\n` +
@@ -78,8 +78,8 @@ console.log(`result1 is ${result1} \n`);
 
 
 //Booleans are express with true and false
-this_is_true = true;
-this_is_false = false;
+let this_is_true = true;
+let this_is_false = false;
 
 
 // Symbols are new in ES6. Similar lisp symbols. All symbol are unique.
@@ -112,7 +112,7 @@ obj1.name = "obj1";
 
 // You can access properties in these way
 
-console.log(obj1['name']);
+console.log(obj1["name"]);
 console.log(obj1.name);
 
 // Accessing undefined properties give undefined.
@@ -139,7 +139,7 @@ const rectangle1 = {
 
 const dog = {
     bark: function() { return "Woof!";}
-}
+};
 
 console.log(dog.bark());
 
@@ -168,7 +168,7 @@ console.log(string1.value1);    // But this will return undefined.
 //  - elements do not all have to be the same type.
 
 
-const a1 = [0, 1, 'c', 3.14];
+const a1 = [0, 1, "c", 3.14];
 const a2 = [ 0, 1, [0, 1, 2 ,3], 3, 4];
 
 // this is how to find the length of an array
@@ -180,7 +180,7 @@ console.log(`The 2nd element of a1 is: ${a1[1]}`);
 
 
 // Overwrite an element of an array by assigning
-a1[3] = "4th element"
+a1[3] = "4th element";
 
 
 
@@ -244,5 +244,5 @@ console.log(unix_time1);
 // All objects in javascript has a toString() function which returns a string
 // representation of the object. default implemenation might not work too well.
 // but for numbers it works well.
-const num4 = 45.56
+const num4 = 45.56;
 console.log(num4.toString());
