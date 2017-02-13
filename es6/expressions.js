@@ -108,7 +108,7 @@ console.log(d2);
 
 // with spread (...) operator
 
-let [a3, b3, ...rest] = arr1
+let [a3, b3, ...rest] = arr1;
 
 console.log(a3); 
 console.log(b3);
