@@ -146,3 +146,112 @@ function saysomething2([word1, word2, word3]) {
 const words_arr = ["Javascript", "is", "buggy"];
 
 saysomething2(words_arr);
+
+
+// New in ES6 are default arguments.
+
+function default1 (x,y="default_value",z) {
+
+    console.log("Inside default1: ");
+    console.log(`   x = ${x}`);
+    console.log(`   y = ${y}`);
+    console.log(`   z = ${z}`);
+}
+
+
+default1(1, 2, 3);
+default1(5);
+
+// When functions are properties of an object, there are called method.
+
+const dog1 = {
+    bark: function() { console.log("Woof!");}
+}
+
+let d = dog1;
+d.bark();
+
+// ES6 has a new shortcut for the above.
+
+const dog2 = {
+    bark() { console.log("Woof!");}
+}
+
+d = dog2;
+d.bark();
+
+
+// "this" keyword is related object-orient programming. Can be used in different ways.
+
+const person1 = {
+    name: "Jim",
+    say_name: function() { return `My name is ${this.name}.`;},
+}
+
+let p = person1;
+console.log(p.say_name());
+
+// The "this" thing is dependent on how the function is called. Not where it is declared.
+
+const p1 = person1.say_name;
+console.log(p1())   // here the name is "undefined";
+
+
+// One common problem with "this" is when attempting to use inside nest functions.
+
+const person2 = {
+    name: "Jack",
+    say_name: function() { return `My name is ${this.name}.`;},
+    say_name_quoted: function() {
+
+        function add_quotes() {
+            return `"${this.name}"`;  // this is undefined.
+        }
+        
+        return add_quotes();
+    }   
+}
+
+
+const p2 = person2;
+console.log(p2.say_name_quoted());  // prints "undefined"
+
+
+// The solution is to bound "this" to another variable and referencing this variable
+// from inside the nested function.
+
+const person3 = {
+    name: "John",
+    say_name: function() { return `My name is ${this.name}.`;},
+    say_name_quoted: function() {
+
+        const self = this;
+        
+        function add_quotes() {
+            return `"${self.name}"`;
+        }
+        
+        return add_quotes();
+    }   
+}
+
+
+const p3 = person3;
+console.log(p3.say_name_quoted());  
+
+
+// Arrow notation. New in ES6;
+// Synatx sugar (with one important difference). Simplifies function declaration.
+
+// The function keyword can be omitted.
+const fn1 = function() { console.log("This is fn1"); }
+fn1();
+// same as:
+const fn2 = () => { console.log("This is fn2"); }
+fn2();
+
+
+// If function takes a single argument, the braces be removed.
+const fn3 = function(something) { console.log(something);}
+fn3("I am hungry");
+                                 
