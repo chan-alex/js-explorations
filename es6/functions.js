@@ -101,11 +101,11 @@ function func1(a) {
 
 // Note: despite the same function being defined twice, node does not complain.
 // only eslint catches the highly likely dubious code.
-function func1(a,b) {
-    console.log("From func1 with 2 argument");    
-    console.log(a);
-    console.log(b);
-}
+//function func1(a,b) {
+//    console.log("From func1 with 2 argument");    
+//    console.log(a);
+//    console.log(b);
+//}
 
 
 func1(1);       // this actually calls the 2 argumentfunction.   
@@ -131,7 +131,7 @@ const words = {
     word1: "Javascript",
     word2: "is",
     word3: "buggy"
-}
+};
 
 saysomething1(words);
 
@@ -166,7 +166,7 @@ default1(5);
 
 const dog1 = {
     bark: function() { console.log("Woof!");}
-}
+};
 
 let d = dog1;
 d.bark();
@@ -175,7 +175,7 @@ d.bark();
 
 const dog2 = {
     bark() { console.log("Woof!");}
-}
+};
 
 d = dog2;
 d.bark();
@@ -186,7 +186,7 @@ d.bark();
 const person1 = {
     name: "Jim",
     say_name: function() { return `My name is ${this.name}.`;},
-}
+};
 
 let p = person1;
 console.log(p.say_name());
@@ -194,7 +194,7 @@ console.log(p.say_name());
 // The "this" thing is dependent on how the function is called. Not where it is declared.
 
 const p1 = person1.say_name;
-console.log(p1())   // here the name is "undefined";
+console.log(p1());   // here the name is "undefined";
 
 
 // One common problem with "this" is when attempting to use inside nest functions.
@@ -210,7 +210,7 @@ const person2 = {
         
         return add_quotes();
     }   
-}
+};
 
 const p2 = person2;
 console.log(p2.say_name_quoted());  // prints "undefined"
@@ -232,7 +232,7 @@ const person3 = {
         
         return add_quotes();
     }   
-}
+};
 
 const p3 = person3;
 console.log(p3.say_name_quoted());  
@@ -242,24 +242,24 @@ console.log(p3.say_name_quoted());
 // Synatx sugar (with one important difference). Simplifies function declaration.
 
 // The function keyword can be omitted.
-const fn1 = function() { console.log("This is fn1"); }
+const fn1 = function() { console.log("This is fn1"); };
 fn1();
 // same as:
-const fn2 = () => { console.log("This is fn2"); }
+const fn2 = () => { console.log("This is fn2"); };
 fn2();
 
 
 // If function takes a single argument, the parentheses  be removed.
-const fn3 = function(something) { console.log(something);}
+const fn3 = function(something) { console.log(something);};
 fn3("I am hungry");
                                  
-const fn4 = something => { console.log(something);}
+const fn4 = something => { console.log(something);};
 
 fn4("I am not hungry");
 
 
 // When the body is a single expression, you can omit the curly braces and return statement.
-const fn5 = function(a,b) { return a * b; }
+const fn5 = function(a,b) { return a * b; };
 console.log(fn5(2,4));
 
 const fn6 = (a,b) => a * b;
@@ -283,7 +283,7 @@ const person4 = {
         
         return add_quotes();
     }   
-}
+};
 
 const p4 = person4;
 console.log(p4.say_name_quoted());  
@@ -300,10 +300,49 @@ console.log(p4.say_name_quoted());
 // specific "this".
 
 const say_name = function() {
-    console.log( `The name of this object is ${this.name}`);
-}
+    console.log( `The name of this person is ${this.name}`);
+};
 
 say_name.call(person3);
 say_name.call(person4);
 
+// The first argument to call is the object to bound "this" to.
+// Any remaining arguments become the argument of the function itself.
 
+const say_name_with_honorific = function (honorific) {
+    console.log( `This of this person is: ${honorific} ${this.name}`);
+};
+
+say_name_with_honorific.call(person3, "Mr");
+say_name_with_honorific.call(person4, "Dr");
+
+
+// Apply is similar to call except it takes arguments as an array:
+
+const update = function(family_name, occupation) {
+    this.family_name = family_name;
+    this.occupation = occupation;
+};
+
+update.apply(person3, ["Snow", "mechanic"]);
+console.log(person3);
+
+
+// Apply is useful if you array arguments.
+console.log(Math.max.apply(null, [2, 5 ,4, -1,10,4]));  // take note of the null.
+
+
+// With ES6 spread operator, it is possible to do the same result as apply.
+
+const details = ["nichols", "golfer"];
+update.call(person4, ...details);
+console.log(person4);
+
+const arr1 = [4,35, 8,4, -10];
+console.log(Math.min.call(...arr1));
+
+
+// Bind allows you to bind a function to a specific "this".
+
+const jack_name = say_name.bind(person4);
+jack_name();
