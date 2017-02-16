@@ -212,7 +212,6 @@ const person2 = {
     }   
 }
 
-
 const p2 = person2;
 console.log(p2.say_name_quoted());  // prints "undefined"
 
@@ -235,7 +234,6 @@ const person3 = {
     }   
 }
 
-
 const p3 = person3;
 console.log(p3.say_name_quoted());  
 
@@ -251,7 +249,61 @@ const fn2 = () => { console.log("This is fn2"); }
 fn2();
 
 
-// If function takes a single argument, the braces be removed.
+// If function takes a single argument, the parentheses  be removed.
 const fn3 = function(something) { console.log(something);}
 fn3("I am hungry");
                                  
+const fn4 = something => { console.log(something);}
+
+fn4("I am not hungry");
+
+
+// When the body is a single expression, you can omit the curly braces and return statement.
+const fn5 = function(a,b) { return a * b; }
+console.log(fn5(2,4));
+
+const fn6 = (a,b) => a * b;
+console.log(fn6(2,4));
+
+
+// Note: Arrow functions are always anonymous are most useful when creating anonymous
+// functions.
+// There is one main differnece - the "this" reference is always bound lexically.
+
+const person4 = {
+    name: "Jack",
+    say_name: function() { return `My name is ${this.name}.`;},
+    say_name_quoted: function() {
+
+        //function add_quotes() {
+        //    return `"${this.name}"`;  // this is undefined.
+        // }
+
+        let add_quotes = () => `"${this.name}"` ;  // "this" bound lexically.
+        
+        return add_quotes();
+    }   
+}
+
+const p4 = person4;
+console.log(p4.say_name_quoted());  
+
+// Other minor differences: arrows functions cannot be used as object constructors.
+// and the "special" arguments variables is not available.
+
+
+
+// Other ways of calling functions.
+
+// Call
+// Every function has a method called "Call" which allows you to call the function with a
+// specific "this".
+
+const say_name = function() {
+    console.log( `The name of this object is ${this.name}`);
+}
+
+say_name.call(person3);
+say_name.call(person4);
+
+
