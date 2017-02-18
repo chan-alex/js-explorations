@@ -65,7 +65,6 @@ console.log(`Outside of  block, x2 = ${x2}`);
 
 // Function scope and closures
 
-
 let print_str;
 
 {
@@ -96,3 +95,48 @@ let f2 = (function() {
 
 // The private_msg resides inside the IIFE. No other way to access it.
 console.log(f2);
+
+// Other example.
+// IIFE can return anything. This one returns a function
+let f3 = (function() {
+    let count = 0;
+    return function() {
+        count += 1;
+        console.log(`-- This function has ben called ${count} times.`);
+    }
+})();
+
+f3();
+f3();
+f3();
+
+
+// var and hoisting
+
+// variables declared are hoisted. They can be used even before they are declared.
+console.log(var1);  // this does not trigger any errors.
+var var1 = "This is var1";
+console.log(var1);
+
+//Variable declared by var can also be re-defined.
+var var1 = "This is var1 again";
+console.log(var1);
+
+// In general, "let" is better than "var"
+
+
+// functions are hoisted too...
+
+f4();
+function f4() {
+    console.log("Hi, this is f4()");
+}
+
+// But functions assigned to variable aren't hoisted tho. They are subject to the
+// scoping rules of the variable.
+
+// f4();  <--- this could cause any error.
+// let f4 = function  {
+//    console.log("Hi, this is f4()");
+// }
+
