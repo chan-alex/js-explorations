@@ -140,3 +140,24 @@ function f4() {
 //    console.log("Hi, this is f4()");
 // }
 
+
+
+
+// Implicit  globals
+// In ES5, if you forgot to declare a variable with var and then reference it,
+// Javascript would assume that you were referring to a global variable.
+// If it didn't exist, Javascript would create one.
+// To use this, "use strict" was introduced. If used in global scope, this would 
+// be applied to the whole script. If used in a function, it applies to the function.
+
+// Many websites use a number of scripts. Using "use strict" in the global scope could 
+// caused some of them to not work.
+
+// If don't want to enable strict mode in very function, one way is to wrap your code 
+// in a IIFE
+
+(function() {
+    use strict;
+
+    // Place your code here.
+})();
