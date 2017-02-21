@@ -107,3 +107,33 @@ arr7.sort((a,b) => a.name < b.name);
 console.log("After sorting arr7 by name, arr7 is: ");
 console.log(arr7);
 
+
+// Searching in arrays
+
+const obj1 = { name: "jim", age: 31};
+const arr8 = [ 1, 2, 3, "x", {name: "jack", age: 21}, obj1, [4,5], 3, "10"];
+
+
+// Searching with indexOf() and lastIndexOf()
+// indexOf() returns index of first index element strictly equal to argument.
+// indexOf() returns -1 if the element cannot be found.
+// If you want to specify starting position can put in the 1st argument.
+// lastIndexOf() is same except it returns the index of the last element found.
+
+console.log(`arr8.indexOf(3) returns ${arr8.indexOf(3)}`);
+console.log(`arr8.lastIndexOf(3) returns ${arr8.lastIndexOf(3)}`);
+
+console.log(`arr8.indexOf("x") returns ${arr8.indexOf("x")}`);
+
+// returns -1
+console.log(`arr8.indexOf({name: "jack", age: 21}) returns ${arr8.indexOf({name: "jack", age: 21})}`);
+
+// returns 5
+console.log(`arr8.indexOf(obj1) returns ${arr8.indexOf(obj1)}`);
+
+// start from position 3, returns 2
+console.log(`arr8.indexOf(3, obj1) returns ${arr8.indexOf(3, obj1)}`);
+
+
+console.log(`arr8.indexOf([4,5]) returns ${arr8.indexOf([4,5])}`);
+
