@@ -84,16 +84,26 @@ console.log(`After arr4.fill("y", 1), arr4 = ${arr4}`);
 
 
 // Reversing.
-
+// make changes in place.
 const arr5 = [1,2,3,4,5];
 arr5.reverse();
 console.log(`After arr5.reverse(), arr5 = ${arr5}`);
 
 
 // Sorting
-
+// make changes in place.
 const arr6 = [4,5,2,6,1,2,3,76];
 arr6.sort();
 console.log(`After arr6.sort(), arr6 = ${arr6}`);
 
+// It is possible to specify a sort function.
+const arr7 = [ {name:"john", age:20}, {name:"jim", age: 30}, {name:"james", age:15} ];
+
+arr7.sort((a,b) => a.age < b.age);
+console.log("After sorting arr7 by age, arr7 is: ");
+console.log(arr7);
+
+arr7.sort((a,b) => a.name < b.name);
+console.log("After sorting arr7 by name, arr7 is: ");
+console.log(arr7);
 
