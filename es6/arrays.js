@@ -137,3 +137,35 @@ console.log(`arr8.indexOf(3, obj1) returns ${arr8.indexOf(3, obj1)}`);
 
 console.log(`arr8.indexOf([4,5]) returns ${arr8.indexOf([4,5])}`);
 
+// findIndex() is similar to indexOf(). More flexible. Can supply a function to determine
+// if an element is an match.
+
+console.log(`arr8.findIndex(x => x === 3) return ${arr8.findIndex(x => x === 3)}`);
+
+// recall indexOf() example above could not find this element.
+console.log(`arr8.findIndex(obj => obj.name === "jack") returns ${arr8.findIndex(obj => obj.name === "jack")}`);
+
+
+// find() is like findIndex() except it returns the element itself instead of just the index.
+// like findIndex(),
+
+console.log(arr8.find(o => o.name === "jack"));
+
+// The functions that you pass to find() and findIndex() also receive the index of the
+// current element.
+
+
+console.log(arr8.find((o,i) =>
+                       {if (o.name === "jack") {
+                           console.log(`found and i is ${i}`);
+                           return true;}} ));
+
+// some() returns true if an element meets an criteria. false otherwise.
+
+
+
+
+
+
+
+
