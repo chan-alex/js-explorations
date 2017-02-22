@@ -162,10 +162,50 @@ console.log(arr8.find((o,i) =>
 
 // some() returns true if an element meets an criteria. false otherwise.
 
+const arr9 = [1,3,5,6,7,8,11];
+
+console.log(`Are there any even integers in arr9? Ans: ${arr9.some(x=>x%2===0)}`);
 
 
 
+// map - transforms any array.
+console.log(arr9.map(x => x*2));
+
+// Does not modify original array.
+console.log(`arr9 = ${ arr9}`);
 
 
+// filter - filter out elements with a function at the filter.
+console.log(`Filtering out the even elements of arr9: ${arr9.filter(x => x%2===0)}`);
 
 
+// reduce - reduce arrays into a single value
+let s1 = arr9.reduce((a,b) => a + b, 0);
+console.log(`The sum of the element in arr9 is ${s1}`);
+
+let c1 = arr9.reduce((a,b) => a + 1, 0);
+console.log(`The number of elements in arr9 is ${c1}`);
+
+
+// Note: All array methods (map, filter, reduce) do not call the given function
+// for elements that has never been assigned or deleted.
+
+// So this won't work
+const arr10 = Array(10).map(x=>5);
+console.log(arr10);
+
+
+delete arr9[3];
+console.log(`After delete arr9[3], arr9 = ${arr9}`);
+
+console.log(`arr9 = ${ arr9}`);
+
+let c2 = arr9.reduce((a,b) => a + 1, 0);
+console.log(`The number of elements in arr9 is ${c2}`);
+
+
+// String joining
+
+console.log(arr9.join());   // default seperator is ","
+console.log(arr9.join("*"));
+console.log(arr9.join("--"));
