@@ -86,7 +86,8 @@ console.log(m3);
 
 // Using weakmap and immediately invoke function expression
 // This is one way to make an property completely private.
-
+// The idea is to use an IIFE to create a closure for the WeakMap which is used
+// to hold the private properties.
 const Motorbike_v3 = (function() {
 
     // This is in the function scope.
@@ -123,3 +124,38 @@ m4.toggle_headlight();
 console.log(m4);
 
 console.log(m4.private_properties);
+
+
+
+// What's underneath the ES6 style objects.
+
+// Classes are functions
+
+// The motorbike class could have been declared this way.
+function Motorbike_es5(make, model) {
+    this.make = make;
+    this.model = model;
+    this.headlight = "Off";
+}
+
+let m1_es5 = Motorbike_es5("Honda", "CBR");
+
+
+
+// The prototype
+// Object methods are "prototype" methods. e.g. MotorBike.toggle_headlight()
+
+// Every function has a special property called "prototype". Normally not used.
+// But important for functions used as constructors.
+// The prototype property is important when the "new" keyword is sued.
+// The newly created object has access to its constructor's prototype property
+// stored at __proto__ property.
+
+// Dyanaic dispatch - when you attempt to access an property or method on an object
+// Javascript checks the object's prototype to see if it exists there.
+
+const mb1 = new Motorbike();
+const mb2 = new Motorbike();
+
+console.log( mb1.toggle_headlight === Motorbike.prototype.toggle_headlight ); // true
+console.log( mb1.toggle_headlight === mb2.toggle_headlight );
