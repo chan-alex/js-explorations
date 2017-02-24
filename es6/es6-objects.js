@@ -157,5 +157,74 @@ let m1_es5 = Motorbike_es5("Honda", "CBR");
 const mb1 = new Motorbike();
 const mb2 = new Motorbike();
 
-console.log( mb1.toggle_headlight === Motorbike.prototype.toggle_headlight ); // true
-console.log( mb1.toggle_headlight === mb2.toggle_headlight );
+console.log(mb1.toggle_headlight === Motorbike.prototype.toggle_headlight); // true
+console.log(mb1.toggle_headlight === mb2.toggle_headlight);  // true
+
+mb1.toggle_headlight = function() { console.log("a new toggle_headlight()"); };
+mb1.toggle_headlight();
+console.log(mb1.toggle_headlight === Motorbike.prototype.toggle_headlight); // false
+console.log(mb1.toggle_headlight === mb2.toggle_headlight);  // false
+
+
+
+//IIFE
+const Motorbike_v4 = (function() {
+
+    let VID = 0;
+
+    class Motorbike {
+
+        static getNextVID() {
+            return VID++;
+        }
+
+        static areSimilar(m1, m2) {
+            return (m1.make === m2.make) && (m1.model === m2.model);
+        }
+
+        static areSame(m1, m2) {
+            return m1.vid === m2.vid;
+        }
+        
+        constructor(make, model) {
+            this.make = make;
+            this.model = model;
+            this.headlight = "Off";
+            this.vid = Motorbike.getNextVID();
+        }
+        toggle_headlight() {
+            switch(this.headlight) {
+            case "Off":
+                this.headlight = "On";
+                break;
+            case "On":    
+                this.headlight = "Off";
+                break;
+            default:
+                throw new Error("Headlight in invalid state!");
+            }
+        }
+    }
+    return Motorbike;
+})();
+
+m3 = new Motorbike_v4("Ducati", "996");
+m4 = new Motorbike_v4("Ducati", "996");
+console.log(m3);
+console.log(m4);
+console.log(`Are m3 and m4 similar? Ans: ${Motorbike_v4.areSimilar(m3,m4)}`);
+console.log(`Are m3 and m4 same? Ans: ${Motorbike_v4.areSame(m3,m4)}`);
+console.log(`Is m3 and m3 similar? Ans: ${Motorbike_v4.areSame(m3,m3)}`);
+
+
+
+// Inheritance
+class Shape {
+
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+    }
+
+
+}
