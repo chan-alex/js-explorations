@@ -221,10 +221,107 @@ console.log(`Is m3 and m3 similar? Ans: ${Motorbike_v4.areSame(m3,m3)}`);
 // Inheritance
 class Shape {
 
-    constructor(x,y) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
+    
+    printCoord() {
+        console.log(`X = ${this.x}  Y = ${this.y}`);
+    }
+}
 
 
+class Square extends Shape {
+
+    constructor(x, y, side){
+        
+        super(x,y);
+        this.side = side;
+
+    }
+
+    printArea() { 
+        console.log(`Area = ${this.side * this.side}`);
+    }
+}
+
+let s1;
+s1 = new Square(19,19,10);
+s1.printCoord();
+s1.printArea();
+
+
+// Object properties.
+// For an object o and a property x, o.hasOwnProperty(x) returns true if the object o has
+// property x. It returns false if the property isn't defined or is defined in the
+// prototype chain
+
+
+// toString()
+
+class Complex {
+
+    constructor(real, img) {
+        this.real = real;
+        this.img = img;
+    }
+
+    toString() {
+        console.log(this.real);
+        console.log(this.img);        
+
+        if(this.img < 0) { return `${this.real} - ${this.img}j`;}
+
+        if(this.img > 0) { return `${this.real} + ${this.img}j`; }
+
+        return `${this.real}`; 
+        
+    }
+}
+
+let c1;
+c1 = new Complex(1,5);
+console.log(c1.toString());
+
+
+// Mixins
+// Javascript is technically a single inhertiance language but it is possible to
+// have something similar to multiple inheritance via mixins.
+
+function makeColored(o) {
+    o.setRGB = function(r,b,g){
+        this.red = r;
+        this.blue = b;
+        this.green = g;
+    };
+
+    o.gotColor = function() {
+        return true;
+    };
+}
+
+makeColored(Shape.prototype);
+//makeColored(Shape.__proto__);
+
+s1 = new Shape(1,1);
+s1.setRGB(55,55,55);
+
+//Mixins has a problem - name collisions.
+// One way to avoid collisions is to use Symbols.
+
+const SET_RGB = Symbol();
+const GOT_COLOR = Symbol();
+
+
+function makeColored_v2(o) {
+    o[SET_RGB] = function(r,b,g){
+        this.red = r;
+        this.blue = b;
+        this.green = g;
+    };
+
+    o[GOT_COLOR] = function() {
+        return true;
+    };
 }
