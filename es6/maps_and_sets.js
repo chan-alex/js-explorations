@@ -107,3 +107,65 @@ console.log("After clear, Team2:");
 console.log(team2);
 
 
+
+// WeakMaps
+// WeakMaps are similar to Map except:
+//   Keys must be objects
+//   Keys can be garbage collected
+//   WeakMap cannot be iterated or cleared.
+
+// Normally will keep an object in memory as long as there is a reference to it.
+// If a normal Map, an object as a key will be kept in there as long as the Map is
+// in existence.
+// One main use of WeakMap is to store private keys in object instances.
+
+const object1 = ( function() {
+    const private_properties = new WeakMap();
+
+    return class {
+        setPrivate(p) {
+            private_properties.set(this,p);
+        }
+
+        getPrivate() {
+            private_properties.get(this);
+        }
+    };
+})();
+
+
+// Sets
+
+const set1 = new Set();
+
+// add() 
+
+set1.add("A");
+set1.add("B");
+set1.add("C");
+set1.add("D");
+
+set1.add("B");   // Trying to add duplicate does not work.
+
+console.log("Set is: ");
+console.log(set1);
+
+
+// size property
+
+console.log(`The size of set1 is ${set1.size}`);
+
+// delete. Returns true if in set, false if not.
+
+let b;
+b = set1.delete("B");
+console.log(`set1.delete("B") returns ${b}`);
+console.log(set1);
+b = set1.delete("B");
+console.log(`set1.delete("B") second time returns ${b}`);
+
+
+// WeakSet
+// Weak form of Set.
+const wset1 = new WeakSet();
+
