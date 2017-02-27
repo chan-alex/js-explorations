@@ -36,3 +36,78 @@ console.log(">>>> Using for...of loop");
 for( let l of arr1) {
     console.log(l);
 }
+
+
+// Iterator protocol.
+// Any object that supports the iterator protocol can be iterated.
+
+class Messages {
+
+    constructor() {
+        this.messages = [];
+    }
+
+    add_message(msg) {
+        this.messages.push( {msg,timestamp: Date.now()} );
+    }
+
+//  The easy way: return Array's iterator
+//    [Symbol.iterator]() {
+//        return this.messages[Symbol.iterator]();
+//    }
+
+    // How to do it yourself.
+    [Symbol.iterator]() {  // function scope. closure.
+        let index = 0;
+        const messages = this.messages;
+
+        return { 
+            next() {
+                if (index >= messages.length)
+                    return { value: undefined, done: true };
+                return {value: messages[index++], done: false};
+            }
+        };
+    }
+}
+
+
+m1 = new Messages();
+
+m1.add_message("Message 1");
+m1.add_message("Message 2");
+m1.add_message("Message 3");
+m1.add_message("Message 4");
+m1.add_message("Message 5");
+m1.add_message("Message 6");
+m1.add_message("Message 7");
+
+
+console.log("m1 = ");
+console.log(m1);
+console.log("Iterating over m1: ");
+
+for(let m of m1) {
+    console.log(m);
+}
+
+// Iterator are also suitable for representing infinite sequences or streams.
+
+class FibonacciSeq {
+    [Symbol.iterator]() {
+        let x = 0, b = 1;   // 1st two numbers.
+
+        return {
+            next() {
+                rval = { value: y, done: false }; // done is always false here.
+                y = x + y;
+                x = rval.value;
+                return rval;
+            }
+        };
+    }
+}
+
+const fs1 = new FibonacciSeq();
+
+console.log(fs1.next());
