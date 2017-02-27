@@ -94,12 +94,13 @@ for(let m of m1) {
 // Iterator are also suitable for representing infinite sequences or streams.
 
 class FibonacciSeq {
+    
     [Symbol.iterator]() {
-        let x = 0, b = 1;   // 1st two numbers.
+        let x = 0, y = 1;   // 1st two numbers.
 
         return {
             next() {
-                rval = { value: y, done: false }; // done is always false here.
+                let rval = { value: y, done: false }; // done is always false here.
                 y = x + y;
                 x = rval.value;
                 return rval;
@@ -110,4 +111,84 @@ class FibonacciSeq {
 
 const fs1 = new FibonacciSeq();
 
-console.log(fs1.next());
+let i=0;
+for(let n of fs1) {
+    console.log(n);
+    if(++i > 5) break;
+}
+
+
+// Generators
+// Similar to iterators.
+// Generators are like functions except:
+//  1. Can yield control to the caller at any point
+//  2. When executed, does not run but returns an iterator.
+
+// Signifed with an * after the function keyword.
+
+
+function* abc() {
+
+    yield "a";
+    yield "b";
+    yield "c";    
+    yield "d";
+    yield "e";
+    yield "f";    
+    yield "g";
+    yield "h";
+    yield "i";
+
+}
+
+// a lot like iterators.
+const iter3 = abc();
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+console.log(iter3.next());
+
+// A generator also be called in a for..of loop.
+for (let x of abc()) {
+    console.log(x);
+}
+
+// Generators allow 2 way conversations
+function* conversation() {
+    const name = yield "Hi, what is your name?";
+    const job = yield "What do you do?";
+
+    return `${name} works as a ${job}`;
+}
+
+const iter4 = conversation();
+console.log(iter4.next());
+console.log(iter4.next("jim"));
+console.log(iter4.next("doctor"));
+
+
+// A return in a generator results in done set to true.
+
+function* abc1() {
+
+    yield "a";
+    yield "b";
+    yield "c";    
+    return "d";  // iteration ends here.
+    yield "e";
+    yield "f";    
+    yield "g";
+    yield "h";
+    yield "i";
+
+}
+
+for (let x of abc1()) {
+    console.log(x);
+}
