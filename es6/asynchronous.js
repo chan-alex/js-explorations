@@ -40,9 +40,41 @@ setTimeout(function() {
 // Erros in callbacks can bring the whole node process down (node process is just an single
 // threaded event loop.
 
+// Handling errors in callbacks can be problematic.
+// Exceptions thrown in callbacks cannot be caught outside of the callback function.
+// try...catch blocks only work within the same function.
 
-//Promises
+const fs = require('fs');
 
+function readSketchyFile() {
+
+    // This try...catch can't catch the error thrown in the callback function.
+    try {
+        fs.readFile('does_not_exist.txt', function(err, data) {
+            if(err) throw err; });
+    } catch(err) {
+        console.log('warning: minor issue occurred, program continuing');
+    }
+}
+
+// If the line below is uncommented, the program crashes.
+// readSketchyFile();
+
+
+
+// Promises
+// Promises ensure that callbacks are always handled in a predictable manner.
+// Can prevent the problem of callbacks being called more than once.
+// When a promised based asynchronous function is called, it returns a Promise
+// instance. Only 2 things can happen to it - either it is fufilled (success) or
+// it is rejected (failure). You are guaranteed only one of these will happen.
+// e.g. it won't be fufilled and then later rejected. And whatever the result,
+// it will only happen once. Once a promise is either fulfilled or rejected,
+// it is consider to be settled.
+
+// Another advantage is that promise are objects that can be passed around.
+// If you something to be started but prefer someone else to do it, just pass
+// the promise to them.
 
 console.log("Testing promise_test1");
 
@@ -70,19 +102,29 @@ promise_test1(10).then(
     function(err) {
         console.log("promise_test1 got error: " + err.message);
     }
-);;
+);
 
 
 
-const fs = require('fs');
+// It appears promises also can't catch exceptions thrown from within callbacks. 
+// 
+//console.log("Testing promise_test2");
 
-function readSketchyFile() {
-    try {
-        fs.readFile('does_not_exist.txt', function(err, data) {
-            if(err) throw err; });
-    } catch(err) {
-        console.log('warning: minor issue occurred, program continuing');
-    }
+function promise_test2() {
+
+    return new Promise(function(resolve, reject) {
+        readSketchyFile();
+    });
+    
 }
+//
+//promise_test2().then(
+//    function() {
+//        console.log("promise_test2 done.");
+//    },
+//    function(err) {
+//        console.log("promise_test2 got error: " + err.message);
+//    }
+//);
 
-readSketchyFile();
+//const p = promise_test2();
