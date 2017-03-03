@@ -97,4 +97,70 @@ setTimeout(promise_test2, 6*1000);
 
 // The example below uses Node's EventEmitter
 
+// The main line to note is the countup.emit() line.
+
+
 const EventEmitter = require('events').EventEmitter;
+
+class Countup extends EventEmitter {
+
+    constructor(count) {
+        super();
+        this.count = count;
+    }
+
+    go() {
+
+        const countup = this;
+
+        return new Promise(function(resolve, reject) {
+            for(let i=0; i < countup.count+1; i++) {
+                setTimeout(function() {
+                    
+                    if(i === 4) {
+                        reject(new Error("Unlucky number 4!"));
+                    }        
+                
+                    if(i < countup.count){
+                        console.log(`count = ${i}`);
+
+                        // This emits a "tick" event. Anyone who want to react to it
+                        // can listen to it.
+                        countup.emit("tick",i);
+                        
+                    } else {
+                        resolve(console.log("Count reached!"));
+                    }
+                }, i * 1000);
+            }
+        });
+    }
+}
+
+
+function events_test1() {
+
+    console.log("Running events_test1()");
+
+    const c = new Countup(8);
+
+    // This attachs a listener to the "tick" event.
+    c.on('tick', function(input) {
+        console.log(`--> Still counting. Current count = ${input}`);
+    });
+
+    c.on('tick', function(input) {
+        console.log(`--> This is the 2nd listener. Current count = ${input}`);
+    });
+
+    
+    c.go()
+        .then(function() {
+            console.log("Done!");
+        })
+        .catch(function(err) {
+            console.log(err.message);
+        });
+}
+         
+setTimeout(events_test1, 15*1000);
