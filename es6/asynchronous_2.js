@@ -100,7 +100,7 @@ setTimeout(promise_test2, 6*1000);
 // The main line to note is the countup.emit() line.
 
 
-const EventEmitter = require('events').EventEmitter;
+const EventEmitter = require("events").EventEmitter;
 
 class Countup extends EventEmitter {
 
@@ -145,11 +145,11 @@ function events_test1() {
     const c = new Countup(8);
 
     // This attachs a listener to the "tick" event.
-    c.on('tick', function(input) {
+    c.on("tick", function(input) {
         console.log(`--> Still counting. Current count = ${input}`);
     });
 
-    c.on('tick', function(input) {
+    c.on("tick", function(input) {
         console.log(`--> This is the 2nd listener. Current count = ${input}`);
     });
 
@@ -187,9 +187,9 @@ class Countup_v2 extends EventEmitter {
             for(let i=0; i < countup.count+1; i++) {
                 countup.timeoutid.push( setTimeout(function() {
 
-                   if(i === 4) {
-                       countup.timeoutid.forEach(clearTimeout); // Clear out timer to end.
-                       reject(new Error("Unlucky number 4!"));
+                    if(i === 4) {
+                        countup.timeoutid.forEach(clearTimeout); // Clear out timer to end.
+                        reject(new Error("Unlucky number 4!"));
                     }        
                 
                     if(i < countup.count){
@@ -217,7 +217,7 @@ function events_test2() {
     const c = new Countup_v2(8);
 
     // This attachs a listener to the "tick" event.
-    c.on('tick', function(input) {
+    c.on("tick", function(input) {
         console.log(`--> Still counting. Current count = ${input}`);
     });
 

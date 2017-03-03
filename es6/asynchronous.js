@@ -44,16 +44,16 @@ setTimeout(function() {
 // Exceptions thrown in callbacks cannot be caught outside of the callback function.
 // try...catch blocks only work within the same function.
 
-const fs = require('fs');
+const fs = require("fs");
 
 function readSketchyFile() {
 
     // This try...catch can't catch the error thrown in the callback function.
     try {
-        fs.readFile('does_not_exist.txt', function(err, data) {
+        fs.readFile("does_not_exist.txt", function(err, data) {
             if(err) throw err; });
     } catch(err) {
-        console.log('warning: minor issue occurred, program continuing');
+        console.log("warning: minor issue occurred, program continuing");
     }
 }
 
@@ -128,3 +128,7 @@ function promise_test2() {
 //);
 
 //const p = promise_test2();
+
+
+// Another thing about promises is that there is no way to have any way to
+// report progress.

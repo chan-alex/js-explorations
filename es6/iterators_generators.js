@@ -72,7 +72,7 @@ class Messages {
 }
 
 
-m1 = new Messages();
+let m1 = new Messages();
 
 m1.add_message("Message 1");
 m1.add_message("Message 2");
